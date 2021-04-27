@@ -1,6 +1,6 @@
 # corgi
 A new thing for doggo.ninja  
-This is a cli for doggo.ninja, it should be pretty nice and useful.  
+This is a cli for doggo.ninja, it should be pretty helpful and useful.  
 ## Refrence:
 ```
 Usage:
