@@ -6,3 +6,4 @@ lib64/
 share/
 lib64
 pyvenv.cfg
+.replit
