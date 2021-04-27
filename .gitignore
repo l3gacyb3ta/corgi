@@ -9,3 +9,5 @@ pyvenv.cfg
 .replit
 __pycache__
 build/
+dist/
+corgi.egg-info/

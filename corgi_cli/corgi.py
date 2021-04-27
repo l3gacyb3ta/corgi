@@ -122,7 +122,7 @@ def printargs(json):  # make args look nice
   for i in json.keys():
     print("{argument} : {value}".format(argument=i, value=json[i]))
 
-if __name__ == '__main__':
+def parse():
   version = 'Corgi 1.1' # version
   arguments = docopt(__doc__, version=version)
   
