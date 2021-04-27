@@ -1,0 +1,11 @@
+README.md
+setup.py
+corgi_cli/__init__.py
+corgi_cli/corgi.py
+corgi_cli.egg-info/PKG-INFO
+corgi_cli.egg-info/SOURCES.txt
+corgi_cli.egg-info/dependency_links.txt
+corgi_cli.egg-info/entry_points.txt
+corgi_cli.egg-info/not-zip-safe
+corgi_cli.egg-info/requires.txt
+corgi_cli.egg-info/top_level.txt

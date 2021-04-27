@@ -7,7 +7,7 @@ with open('README.md') as f:
   long_description = f.read()
 
 setup(
-		name ='corgi',
+		name ='corgi-cli',
 		version ='1.0.0',
 		author ='Raleigh Wise',
 		author_email ='vibhu4agarwal@gmail.com',

@@ -1,0 +1,3 @@
+[console_scripts]
+corgi = corgi_cli.corgi:parser
+
