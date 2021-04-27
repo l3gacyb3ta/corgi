@@ -1,10 +1,29 @@
+"""DOGGO CLI
+
+Usage:
+    corgi.py
+    corgi.py <path>
+    corgi.py --list-files
+
+Options:
+    <path>  Optional path argument.
+
+"""
 import requests, os
-import magic           # magic for mime types
+import magic                    # magic for mime types
+from docopt import docopt       # cli
+
 
 token = os.environ["TOKEN"]                     # Get the token from an OS variable
 headers = {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/octet-stream'}  # Setup auth header
 baseUrl = "https://pat.doggo.ninja/v1/"         # Convience 
 mime = magic.Magic(mime=True)                   # setup mime getter
+
+def main():
+    """
+    A cli for doggo.ninja.
+    """
+    pass
 
 def getuser():
     """Gets the username."""
@@ -26,7 +45,14 @@ def uploadfile(path):
     return r.json() #debug
     #return mimeType
 
-print(uploadfile("corgi.py"))
+# print(uploadfile())
 
 # print(getuser())
 # getfiles()
+
+if __name__ == '__main__':
+    arguments = docopt(__doc__, version='DOGGO 1.0')
+    if arguments['<path>']:
+        print(uploadfile(arguments['<path>']))
+    else:
+        print(arguments)
