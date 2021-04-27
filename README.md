@@ -33,5 +33,5 @@ Get user info:
 Delete ```file.txt``` from doggo.ninja:  
 ```corgi delete file.txt```  
   
-Delete _every_ file from doggo.ninja:  
+Delete _every_ file you stored on doggo.ninja:  
 ```corgi delete --all```
