@@ -4,7 +4,7 @@ Usage:
     corgi.py
     corgi.py ls
     corgi.py user
-    corgi.py [-d | --dir] <path>
+    corgi.py upload [-d | --dir] <path>
     corgi.py delete [--all] [<originalName>]
     corgi.py -v
 
