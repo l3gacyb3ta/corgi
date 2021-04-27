@@ -8,3 +8,4 @@ lib64
 pyvenv.cfg
 .replit
 __pycache__
+build/
