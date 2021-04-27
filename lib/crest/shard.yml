@@ -1,0 +1,27 @@
+name: crest
+version: 0.27.0
+
+authors:
+  - Anton Maminov <anton.maminov@gmail.com>
+
+description: |
+  HTTP and REST client for Crystal
+
+crystal: ">= 0.36.0"
+
+dependencies:
+  http-client-digest_auth:
+    github: mamantoha/http-client-digest_auth
+    version: ~> 0.6.0
+  http_proxy:
+    github: mamantoha/http_proxy
+    version: ~> 0.8.0
+
+development_dependencies:
+  kemal:
+    github: kemalcr/kemal
+    version: ~> 1.0.0
+  ameba:
+    github: crystal-ameba/ameba
+
+license: MIT
