@@ -10,4 +10,4 @@ pyvenv.cfg
 __pycache__
 build/
 dist/
-corgi.egg-info/
+corgi_cli.egg-info/
