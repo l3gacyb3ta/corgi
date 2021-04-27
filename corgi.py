@@ -2,7 +2,7 @@ import requests, os
 import magic           # magic for mime types
 
 token = os.environ["TOKEN"]                     # Get the token from an OS variable
-headers = {'Authorization': 'Bearer ' + token}  # Setup auth header
+headers = {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/octet-stream'}  # Setup auth header
 baseUrl = "https://pat.doggo.ninja/v1/"         # Convience 
 mime = magic.Magic(mime=True)                   # setup mime getter
 
@@ -18,12 +18,15 @@ def getfiles():
 
 def uploadfile(path):
     """Upload the file given in the path."""
-    mimeType = mime(path)
-    params = {"mimeType" : mimeType, "originalName" : path}
-    r = requests.post(baseUrl + 'uploads', params=params, headers=headers)
-    return r.json()
+    mimeType = mime.from_file(path) #mime type
+    params = {"mimeType" : mimeType, "originalName" : path} #setup params
 
-uploadfile("UNLICENSE")
+    toFile = open(path, "rb") # file to upload
+    r = requests.post(baseUrl + 'upload', params=params, headers=headers, files = {"file": toFile}) #ehhh requests
+    return r.json() #debug
+    #return mimeType
+
+print(uploadfile("corgi.py"))
 
 # print(getuser())
 # getfiles()
