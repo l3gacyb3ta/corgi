@@ -18,9 +18,12 @@ def getfiles():
 
 def uploadfile(path):
     """Upload the file given in the path."""
-    return path
+    mimeType = mime(path)
+    params = {"mimeType" : mimeType, "originalName" : path}
+    r = requests.post(baseUrl + 'uploads', params=params, headers=headers)
+    return r.json()
 
-
+uploadfile("UNLICENSE")
 
 # print(getuser())
 # getfiles()
