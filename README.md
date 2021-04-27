@@ -1,15 +1,18 @@
 # corgi
 A new thing for doggo.ninja  
 This is a cli for doggo.ninja, it should be pretty helpful and useful.  
+## Install
+To install:  
+```pip install corgi-cli```
 ## Refrence:
 ```
 Usage:
-    corgi.py
-    corgi.py ls
-    corgi.py user
-    corgi.py upload [-d | --dir] <path>
-    corgi.py delete [--all] [<originalName>]
-    corgi.py -v
+    corgi
+    corgi ls
+    corgi user
+    corgi upload [-d | --dir] <path>
+    corgi delete [--all] [<originalName>]
+    corgi -v
 
 Options:
     <path>  Optional path argument.
@@ -17,16 +20,16 @@ Options:
 ```
 ## Examples:
 Upload ```file.txt```:  
-```python corgi.py upload file.txt```  
+```corgi upload file.txt```  
   
 Upload every file from a directory:  
-```python corgi.py upload --dir directory```  
+```corgi upload --dir directory```  
   
 Get user info:  
-```python corgi.py user```  
+```corgi user```  
   
 Delete ```file.txt``` from doggo.ninja:  
-```python corgi.py delete file.txt```  
+```corgi delete file.txt```  
   
 Delete _every_ file from doggo.ninja:  
-```python corgi.py delete --all```
+```corgi delete --all```
