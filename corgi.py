@@ -4,7 +4,7 @@ Usage:
     corgi.py
     corgi.py ls
     corgi.py user
-    corgi.py upload [-d | --dir] <path>
+    corgi.py [-d | --dir] <path>
     corgi.py delete [--all] [<originalName>]
     corgi.py -v
 
@@ -14,21 +14,12 @@ Options:
 
 """
 
-hp = """DOGGO.NINJA CLI
-
-Usage:
-    corgi.py
-    corgi.py ls
-    corgi.py user
-    corgi.py upload [--dir] <path>
-    corgi.py delete [--all] <originalName>
-"""
 import requests, os
-import magic                    # magic for mime types
-from docopt import docopt       # cli
+import magic                   # magic for mime types
+from docopt import docopt      # cli
 
 try:
-  token = os.environ["TOKEN"]                     # Get the token from an OS variable
+  token = os.environ["TOKEN"]  # Get the token from an OS variable
 except:
   print("Token ENV var not defined.")
   exit()
@@ -46,17 +37,17 @@ def sizeof(num, suffix='B'):
   return "%.1f %s%s" % (num, 'Yi', suffix)
 
 def getuser():
-  """Gets the username."""
+  # Gets the username.
   r = requests.get(baseUrl + 'me', headers=headers)
   return r.json()
 
 def getfiles():
-  """Get the uploaded files."""
+  # Get the uploaded files.
   r = requests.get(baseUrl + 'files', headers=headers)
   return r.json()
 
 def uploadfile(path):
-  """Upload the file given in the path."""
+  # Upload the file given in the path.
   mimeType = mime.from_file(path) #mime type
   params = {"mimeType" : mimeType, "originalName" : path} #setup params
 
@@ -65,6 +56,7 @@ def uploadfile(path):
   return r.json() #debug
 
 def uploaddir(path):
+  # thanks stackoverflow for file walking code 
   for root, dirs, files in os.walk(path, topdown=False):
    for name in files:
      uploadfile(os.path.join(root, name))
@@ -72,10 +64,13 @@ def uploaddir(path):
 def printfiles(json): # pretty print the files
   text = ""
   if json == []:
+    # Error handling
     return "No files."
   
   for i in json:
+    # Text concatination
     text = text + "Name: " + i['originalName'] + "\n" + "Url: " + i['url'] + '\n' + '-' * 35 + "\n"
+  
   return text
 
 def printuser(json): # pretty print the user info
@@ -102,57 +97,77 @@ def delete(originalName):
   else:                      # otherwise, there was an error we didn't catch, so return the json.
     return "Error: " + r.json()
 
-def deleteall(): #deletes every single file on doggo.ninja
-  files = getfiles()
+def deleteall():     # deletes every single file on doggo.ninja
+  files = getfiles() # grab the file info
   shorts = {}
+
   for i in files:
+    # get all the shorts
     shorts[i['shortName']] = i['originalName']
 
   if shorts == []:
+    # error catcher
     return "No files to delete."
   
   for short in shorts.keys():
+    # delete each file in the shorts
     r = requests.delete(baseUrl + 'file/' + short, headers=headers)
     if r.json() == {}:
       print(shorts[short] + " deleted.")
     else:
       print("Error: " + r.json())
-  
   return "Mass delete finished"
 
+def printargs(json):  # make args look nice
+  for i in json.keys():
+    print("{argument} : {value}".format(argument=i, value=json[i]))
+
 if __name__ == '__main__':
-  version = 'Corgi 1.1'
+  version = 'Corgi 1.1' # version
   arguments = docopt(__doc__, version=version)
   
   if arguments['<path>']:
+    # if there's a path, then upload
     if arguments['-d'] or arguments['--dir']:
+      # If it's a directory, then it will uploaded
       print(uploaddir(arguments['<path>']))
+
     else:
+      # Otherwise, just upload a file
       print(uploadfile(arguments['<path>']))
 
   elif arguments['ls']:
+    # Shows all the files you have
     print(printfiles(getfiles()))
 
   elif arguments['delete']:
+    # Delete a file
     if arguments['--all']:
+      # If it's all, then delete all files
       conf = ""
       while not conf.lower() in ['y','n']:
+        # Make sure you want to delete.
         conf = input("Are you 100% sure? (y/n) ")
       
       if conf.lower() == "y":
+        # If their sure, then DELETE
         print(deleteall())
 
       else:
+        # I just thought this was funny
         print("That's ok! Good catch.")
     
     else:
+      # just a normal delete
       print(delete(arguments['<originalName>']))
 
   elif arguments['user']:
+    # user info
     print(printuser(getuser()))
   
   elif arguments['-v']:
+    # version y'all
     print(version)
   
   else:
-    print(arguments)
+    print(printargs(arguments))
