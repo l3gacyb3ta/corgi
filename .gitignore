@@ -7,3 +7,4 @@ share/
 lib64
 pyvenv.cfg
 .replit
+__pycache__
