@@ -14,7 +14,7 @@ Options:
 
 """
 
-import requests, os
+import requests, os, platform
 import magic                   # magic for mime types
 from docopt import docopt      # cli
 
@@ -94,6 +94,7 @@ def delete(originalName):
   
   if r.json() == {}:         # if there's no response, it works! 
     return originalName + " deleted."
+    
   else:                      # otherwise, there was an error we didn't catch, so return the json.
     return "Error: " + r.json()
 
@@ -171,3 +172,5 @@ def parse():
   
   else:
     print(printargs(arguments))
+
+parse()
